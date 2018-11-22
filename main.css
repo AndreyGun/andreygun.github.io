@@ -198,6 +198,8 @@ body {
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+  height: 400px;
+  background: red;
 }
 .step-info {
   font-size: 2rem;
