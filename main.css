@@ -12,7 +12,9 @@ img {
   display: inline-block;
   max-width: 100%;
 }
-
+body {
+  height: 100vh;
+}
 button {
   position: relative;
   width: 30vw;
