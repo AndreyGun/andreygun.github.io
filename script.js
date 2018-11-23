@@ -8,3 +8,4 @@ $(document).ready(function() {
     $(".my-own-footer").find("." + side).text(x);
   })
 });
+
