@@ -121,12 +121,9 @@ jQuery(document).ready(function($) {
   /* working code bottom */
   /********** VIDEO CAMERA ********/
   $(function () {
-    var width = 320;
+    var width = 300;
     var height = 150;
     var startbutton = document.getElementById('makePhoto');
-
-
-
     var video = document.getElementById('camera');
     var canvas = document.getElementById('canvas');
     var photo = document.getElementById('photo');
@@ -176,10 +173,12 @@ jQuery(document).ready(function($) {
       if (width && height) {
         canvas.width = width;
         canvas.height = height;
-        //context.drawImage(video, 0, 0, width, height);
-        context.drawImage(drawImg, 0, 0, width, height);
-        var data = canvas.toDataURL('image/png');
-        photo.setAttribute('src', data);
+        context.drawImage(video, 0, 0, width, height);
+        //context.drawImage(drawImg, 0, 0, width, height);
+        //console.log("1");
+        //var data = canvas.toDataURL('image/png');
+        //console.log("2");
+        //photo.setAttribute('src', data);
       } else {
         clearphoto();
       }
@@ -190,8 +189,8 @@ jQuery(document).ready(function($) {
       context.fillStyle = "#AAA";
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      var data = canvas.toDataURL('image/png');
-      photo.setAttribute('src', data);
+      //var data = canvas.toDataURL('image/png');
+      //photo.setAttribute('src', data);
     }
       
   });
