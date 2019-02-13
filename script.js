@@ -25,7 +25,7 @@ jQuery(document).ready(function($) {
   /* Поддержка везде */
   var ball   = document.querySelector('.ball');
   var garden = document.querySelector('.garden');
-  var output = document.querySelector('.output');
+  var output = document.querySelector('.output-text');
 
   var maxX = garden.clientWidth  - ball.clientWidth;
   var maxY = garden.clientHeight - ball.clientHeight;
