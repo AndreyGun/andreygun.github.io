@@ -185,7 +185,7 @@ jQuery(document).ready(function($) {
 
   function init(e) {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      const stream = navigator.mediaDevices.getUserMedia(constraints);
       handleSuccess(stream);
       e.target.disabled = true;
     } catch (e) {
