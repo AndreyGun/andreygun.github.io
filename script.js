@@ -116,8 +116,6 @@ jQuery(document).ready(function($) {
   });
 
 
-
- // try to take a picture
   /* working code bottom */
   /********** VIDEO CAMERA ********/
   $(function () {
@@ -134,20 +132,45 @@ jQuery(document).ready(function($) {
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
 
-      var constraints = {
-           audio: false,
-           video: {
+      // var constraints = {
+      //      audio: false,
+      //      video: {
+      //          facingMode: 'user'
+      //      }
+      // }
+      // navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+      //   video.srcObject = stream;
+      //   video.setAttribute('width', width);
+      //   video.setAttribute('height', height);
+      //   canvas.setAttribute('width', width);
+      //   canvas.setAttribute('height', height);
+      // });
+
+    var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    var cameraStream;
+
+    getUserMedia.call(navigator, {
+          video: {
                facingMode: 'user'
-           }
-      }
-      navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
-        video.srcObject = stream;
-        video.setAttribute('width', width);
-        video.setAttribute('height', height);
-        canvas.setAttribute('width', width);
-        canvas.setAttribute('height', height);
+           },
+          audio: false //optional
+      }, function (stream) {
+          /*
+          Here's where you handle the stream differently. Chrome needs to convert the stream
+          to an object URL, but Firefox's stream already is one.
+          */
+          if (window.webkitURL) {
+              video.src = window.webkitURL.createObjectURL(stream);
+          } else {
+              video.src = stream;
+          }
+
+          //save it for later
+          cameraStream = stream;
+
+          video.play();
       });
-    }
+   }
       
 
     // start camera
@@ -173,11 +196,6 @@ jQuery(document).ready(function($) {
         canvas.width = width;
         canvas.height = height;
         context.drawImage(video, 0, 0, width, height);
-        //context.drawImage(drawImg, 0, 0, width, height);
-        //console.log("1");
-        //var data = canvas.toDataURL('image/png');
-        //console.log("2");
-        //photo.setAttribute('src', data);
         $("#canvas").addClass("is-visible");
       } else {
         clearphoto();
@@ -188,92 +206,7 @@ jQuery(document).ready(function($) {
       var context = canvas.getContext('2d');
       context.fillStyle = "#AAA";
       context.fillRect(0, 0, canvas.width, canvas.height);
-
-      //var data = canvas.toDataURL('image/png');
-      //photo.setAttribute('src', data);
     }
       
   });
-
-// (function() {
-
-//   var width = 320; 
-//   var height = 0;
-//   var streaming = false;
-
-//   function startup() {
-//     video = document.getElementById('camera');
-//     canvas = document.getElementById('canvas');
-//     photo = document.getElementById('photo');
-//     startbutton = document.getElementById('makePhoto');
-//     drawImg = document.getElementById('drawImg');
-
-//     navigator.getMedia = ( navigator.getUserMedia ||
-//                            navigator.webkitGetUserMedia ||
-//                            navigator.mozGetUserMedia ||
-//                            navigator.msGetUserMedia);
-
-//     navigator.getMedia(
-//       {
-//         video: true,
-//         audio: false
-//       },
-//       function(stream) {
-//         var vendorURL = window.URL || window.webkitURL;
-//         video.src = vendorURL.createObjectURL(stream);
-//         video.play();
-//       },
-//       function(err) {
-//         console.log("An error occured! " + err);
-//       }
-//     );
-
-//     video.addEventListener('canplay', function(ev){
-//       if (!streaming) {
-//         height = video.videoHeight / (video.videoWidth/width);
-      
-//         video.setAttribute('width', width);
-//         video.setAttribute('height', height);
-//         canvas.setAttribute('width', width);
-//         canvas.setAttribute('height', height);
-//         streaming = true;
-//       }
-//     }, false);
-
-//     startbutton.addEventListener('click', function(ev){
-//      $(".camera-text").text("camera work and photo111" );
-//       takepicture();
-//       //ev.preventDefault();
-//     }, false);
-    
-//     clearphoto();
-//   }
-
-
-//   function clearphoto() {
-//     var context = canvas.getContext('2d');
-//     context.fillStyle = "#AAA";
-//     context.fillRect(0, 0, canvas.width, canvas.height);
-
-//     var data = canvas.toDataURL('image/png');
-//     photo.setAttribute('src', data);
-//   }
-
-//   function takepicture() {
-//     var context = canvas.getContext('2d');
-//     if (width && height) {
-//       canvas.width = width;
-//       canvas.height = height;
-//       context.drawImage(video, 0, 0, width, height);
-    
-//       var data = canvas.toDataURL('image/png');
-//       console.log(data);
-//       photo.setAttribute('src', data);
-//     } else {
-//       clearphoto();
-//     }
-//   }
-//   window.addEventListener('load', startup, false);
-// })();
-
 });
