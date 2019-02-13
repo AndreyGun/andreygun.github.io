@@ -153,12 +153,12 @@ jQuery(document).ready(function($) {
     // start camera
     $("#showCamera").on("click", function() {
       startCamera();
-      $(".camera-text").text("camera work1" );
+      $(".camera-text").text("работает камера" );
     });
 
     // make photo
     startbutton.addEventListener('click', function(ev){
-      $(".camera-text").text("make photo!2" );
+      $(".camera-text").text("сделать фотку" );
       takepicture();
       ev.preventDefault();
     }, false);
@@ -178,6 +178,7 @@ jQuery(document).ready(function($) {
         //var data = canvas.toDataURL('image/png');
         //console.log("2");
         //photo.setAttribute('src', data);
+        $("#canvas").addClass("is-visible");
       } else {
         clearphoto();
       }

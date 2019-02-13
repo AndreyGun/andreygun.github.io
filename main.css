@@ -39,6 +39,7 @@ body {
   min-width: 320px;
   color: #fff;
   background: #282828;
+  min-height: 500px;
 }
 .wrapper {
   padding: 30px 10px;
@@ -151,13 +152,21 @@ body {
 #video-container {
   position: relative;
   margin: 10px auto;
-  width: 100%;
   padding: 10px;
   background: white;
   box-shadow: 0 1px 10px #D9D9D9;
+  width: 300px;
+  height: 225px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#video-container img {
-  width: 100%;
+#canvas {
+  display: none;
+}
+#canvas.is-visible {
+  display: block;
 }
 .camera-btn {
   display: inline-block;
@@ -170,17 +179,5 @@ body {
 }
 #camera-stream {
   width: 100%;
-}
-
-#video-container video {
-  position: absolute;
-  height: 90%;
-  width: 90%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  object-fit: cover;
 }
 /*********************/
