@@ -145,19 +145,12 @@ jQuery(document).ready(function($) {
   /*-------------------END-----------------------
   */
   // Put variables in global scope to make them available to the browser console.
+
   const constraints = window.constraints = {
     audio: false,
     video: true
   };
 
-  function handleSuccess(stream) {
-    const video = document.querySelector('video');
-    const videoTracks = stream.getVideoTracks();
-    console.log('Got stream with constraints:', constraints);
-    console.log(`Using video device: ${videoTracks[0].label}`);
-    window.stream = stream; // make variable available to browser console
-    video.srcObject = stream;
-  }
 
   function handleError(error) {
     if (error.name === 'ConstraintNotSatisfiedError') {
@@ -179,7 +172,18 @@ jQuery(document).ready(function($) {
     }
   }
 
-  async function init(e) {
+  function handleSuccess(stream) {
+    //var videoTracks = stream.getVideoTracks();
+
+    //console.log('Got stream with constraints:', constraints);
+    //console.log(`Using video device: ${videoTracks[0].label}`);
+
+    var video = document.querySelector('video');
+    //window.stream = stream; // make variable available to browser console
+    video.srcObject = stream;
+  }
+
+  function init(e) {
     try {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       handleSuccess(stream);
@@ -189,7 +193,6 @@ jQuery(document).ready(function($) {
     }
   }
 
-  //document.querySelector('#showVideo').addEventListener('click', e => init(e));
   
   $(".camera-btn").on("click",function(e){
     init(e);
