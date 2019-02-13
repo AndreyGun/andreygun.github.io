@@ -183,9 +183,9 @@ jQuery(document).ready(function($) {
     video.srcObject = stream;
   }
 
-  function init(e) {
+  async function init(e) {
     try {
-      const stream = navigator.mediaDevices.getUserMedia(constraints);
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
       handleSuccess(stream);
       e.target.disabled = true;
     } catch (e) {
