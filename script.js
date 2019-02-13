@@ -127,7 +127,6 @@ jQuery(document).ready(function($) {
     var video = document.getElementById('camera');
     var canvas = document.getElementById('canvas');
     var photo = document.getElementById('photo');
-    var drawImg = document.getElementById('drawImg');
 
       
     function startCamera() {
