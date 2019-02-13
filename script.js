@@ -170,6 +170,7 @@ jQuery(document).ready(function($) {
     }
     $(".camera-btn").on("click",function(){
       console.log("gggg");
+    $(".camera-text").text("GO NAHUI! 2 РАЗА" );
       navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
           video.srcObject = stream;
       });
