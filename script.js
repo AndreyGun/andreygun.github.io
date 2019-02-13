@@ -120,155 +120,161 @@ jQuery(document).ready(function($) {
  // try to take a picture
   /* working code bottom */
   /********** VIDEO CAMERA ********/
-  // $(function () {
-  //   var width = 320;
-  //   var height = 0;
-  //   var startbutton = document.getElementById('makePhoto');
+  $(function () {
+    var width = 320;
+    var height = 150;
+    var startbutton = document.getElementById('makePhoto');
 
-  //   function startCamera() {
 
-  //     var video = document.getElementById('camera');
-  //     var canvas = document.getElementById('canvas');
-  //     var photo = document.getElementById('photo');
-  //     video.setAttribute('autoplay', '');
-  //     video.setAttribute('muted', '');
-  //     video.setAttribute('playsinline', '');
 
-  //     var constraints = {
-  //          audio: false,
-  //          video: {
-  //              facingMode: 'user'
-  //          }
-  //     }
-  //     video.setAttribute('width', width);
-  //     video.setAttribute('height', height);
-  //     canvas.setAttribute('width', width);
-  //     canvas.setAttribute('height', height);
+    var video = document.getElementById('camera');
+    var canvas = document.getElementById('canvas');
+    var photo = document.getElementById('photo');
+    var drawImg = document.getElementById('drawImg');
 
-  //     navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
-  //       video.srcObject = stream;
-  //     });
-  //   }
       
+    function startCamera() {
+      video.setAttribute('autoplay', '');
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
 
-  //     // start camera
-  //     $("#showCamera").on("click", function() {
-  //       startCamera();
-  //       $(".camera-text").text("camera work1" );
-  //     });
-
-  //     // make photo
-  //     startbutton.addEventListener('click', function(ev){
-  //       $(".camera-text").text("make photo!2" );
-  //       takepicture();
-  //       ev.preventDefault();
-  //     }, false);
-
-  //     // remove old photo
-  //     clearphoto();
-
-
-  //     function takepicture() {
-  //       var context = canvas.getContext('2d');
-  //       if (width && height) {
-  //         canvas.width = width;
-  //         canvas.height = height;
-  //         context.drawImage(video, 0, 0, width, height);
-        
-  //         var data = canvas.toDataURL('image/png');
-  //         photo.setAttribute('src', data);
-  //       } else {
-  //         clearphoto();
-  //       }
-  //     }
-
-  //     function clearphoto() {
-  //       var context = canvas.getContext('2d');
-  //       context.fillStyle = "#AAA";
-  //       context.fillRect(0, 0, canvas.width, canvas.height);
-
-  //       var data = canvas.toDataURL('image/png');
-  //       photo.setAttribute('src', data);
-  //     }
-      
-  // });
-(function() {
-
-  var width = 320; 
-  var height = 0;
-  var streaming = false;
-
-  function startup() {
-    video = document.getElementById('camera');
-    canvas = document.getElementById('canvas');
-    photo = document.getElementById('photo');
-    startbutton = document.getElementById('makePhoto');
-
-    navigator.getMedia = ( navigator.getUserMedia ||
-                           navigator.webkitGetUserMedia ||
-                           navigator.mozGetUserMedia ||
-                           navigator.msGetUserMedia);
-
-    navigator.getMedia(
-      {
-        video: true,
-        audio: false
-      },
-      function(stream) {
-        var vendorURL = window.URL || window.webkitURL;
-        video.src = vendorURL.createObjectURL(stream);
-        video.play();
-      },
-      function(err) {
-        console.log("An error occured! " + err);
+      var constraints = {
+           audio: false,
+           video: {
+               facingMode: 'user'
+           }
       }
-    );
-
-    video.addEventListener('canplay', function(ev){
-      if (!streaming) {
-        height = video.videoHeight / (video.videoWidth/width);
-      
+      navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+        video.srcObject = stream;
         video.setAttribute('width', width);
         video.setAttribute('height', height);
         canvas.setAttribute('width', width);
         canvas.setAttribute('height', height);
-        streaming = true;
-      }
-    }, false);
+      });
+    }
+      
 
+    // start camera
+    $("#showCamera").on("click", function() {
+      startCamera();
+      $(".camera-text").text("camera work1" );
+    });
+
+    // make photo
     startbutton.addEventListener('click', function(ev){
-     $(".camera-text").text("camera work and photo111" );
+      $(".camera-text").text("make photo!2" );
       takepicture();
-      //ev.preventDefault();
+      ev.preventDefault();
     }, false);
-    
+
+    // remove old photo
     clearphoto();
-  }
 
 
-  function clearphoto() {
-    var context = canvas.getContext('2d');
-    context.fillStyle = "#AAA";
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    function takepicture() {
+      var context = canvas.getContext('2d');
+      if (width && height) {
+        canvas.width = width;
+        canvas.height = height;
+        //context.drawImage(video, 0, 0, width, height);
+        context.drawImage(drawImg, 0, 0, width, height);
+        var data = canvas.toDataURL('image/png');
+        photo.setAttribute('src', data);
+      } else {
+        clearphoto();
+      }
+    }
 
-    var data = canvas.toDataURL('image/png');
-    photo.setAttribute('src', data);
-  }
+    function clearphoto() {
+      var context = canvas.getContext('2d');
+      context.fillStyle = "#AAA";
+      context.fillRect(0, 0, canvas.width, canvas.height);
 
-  function takepicture() {
-    var context = canvas.getContext('2d');
-    if (width && height) {
-      canvas.width = width;
-      canvas.height = height;
-      context.drawImage(video, 0, 0, width, height);
-    
       var data = canvas.toDataURL('image/png');
       photo.setAttribute('src', data);
-    } else {
-      clearphoto();
     }
-  }
-  window.addEventListener('load', startup, false);
-})();
+      
+  });
+
+// (function() {
+
+//   var width = 320; 
+//   var height = 0;
+//   var streaming = false;
+
+//   function startup() {
+//     video = document.getElementById('camera');
+//     canvas = document.getElementById('canvas');
+//     photo = document.getElementById('photo');
+//     startbutton = document.getElementById('makePhoto');
+//     drawImg = document.getElementById('drawImg');
+
+//     navigator.getMedia = ( navigator.getUserMedia ||
+//                            navigator.webkitGetUserMedia ||
+//                            navigator.mozGetUserMedia ||
+//                            navigator.msGetUserMedia);
+
+//     navigator.getMedia(
+//       {
+//         video: true,
+//         audio: false
+//       },
+//       function(stream) {
+//         var vendorURL = window.URL || window.webkitURL;
+//         video.src = vendorURL.createObjectURL(stream);
+//         video.play();
+//       },
+//       function(err) {
+//         console.log("An error occured! " + err);
+//       }
+//     );
+
+//     video.addEventListener('canplay', function(ev){
+//       if (!streaming) {
+//         height = video.videoHeight / (video.videoWidth/width);
+      
+//         video.setAttribute('width', width);
+//         video.setAttribute('height', height);
+//         canvas.setAttribute('width', width);
+//         canvas.setAttribute('height', height);
+//         streaming = true;
+//       }
+//     }, false);
+
+//     startbutton.addEventListener('click', function(ev){
+//      $(".camera-text").text("camera work and photo111" );
+//       takepicture();
+//       //ev.preventDefault();
+//     }, false);
+    
+//     clearphoto();
+//   }
+
+
+//   function clearphoto() {
+//     var context = canvas.getContext('2d');
+//     context.fillStyle = "#AAA";
+//     context.fillRect(0, 0, canvas.width, canvas.height);
+
+//     var data = canvas.toDataURL('image/png');
+//     photo.setAttribute('src', data);
+//   }
+
+//   function takepicture() {
+//     var context = canvas.getContext('2d');
+//     if (width && height) {
+//       canvas.width = width;
+//       canvas.height = height;
+//       context.drawImage(video, 0, 0, width, height);
+    
+//       var data = canvas.toDataURL('image/png');
+//       console.log(data);
+//       photo.setAttribute('src', data);
+//     } else {
+//       clearphoto();
+//     }
+//   }
+//   window.addEventListener('load', startup, false);
+// })();
 
 });
