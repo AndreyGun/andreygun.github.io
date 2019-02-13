@@ -102,13 +102,12 @@ jQuery(document).ready(function($) {
     var canvas = null;
     var photo = null;
     var startbutton = null;
+    video = document.getElementById('camera');
+    canvas = document.getElementById('canvas');
+    photo = document.getElementById('photo');
+    startbutton = document.getElementById('makePhoto');
 
-
-      video = document.getElementById('camera');
-      canvas = document.getElementById('canvas');
-      photo = document.getElementById('photo');
-      startbutton = document.getElementById('makePhoto');
-
+    function startCamera() {
 
       //video.style.width = document.width + 'px';
       //video.style.height = document.height + 'px';
@@ -122,6 +121,33 @@ jQuery(document).ready(function($) {
                facingMode: 'user'
            }
       }
+      video.setAttribute('width', width);
+      video.setAttribute('height', height);
+      canvas.setAttribute('width', width);
+      canvas.setAttribute('height', height);
+
+      navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+        video.srcObject = stream;
+      });
+    }
+      
+
+      // start camera
+      $("#showCamera").on("click", function() {
+        startCamera();
+        $(".camera-text").text("camera work" );
+      });
+
+      // make photo
+      startbutton.addEventListener('click', function(ev){
+        $(".camera-text").text("make photo!" );
+        takepicture();
+        ev.preventDefault();
+      }, false);
+
+      // remove old photo
+      clearphoto();
+
 
       function takepicture() {
         var context = canvas.getContext('2d');
@@ -136,30 +162,6 @@ jQuery(document).ready(function($) {
           clearphoto();
         }
       }
-
-      // start camera
-      $("#startbutton").on("click",function() {
-        $(".camera-text").text("camera work" );
-      
-        video.setAttribute('width', width);
-        video.setAttribute('height', height);
-        canvas.setAttribute('width', width);
-        canvas.setAttribute('height', height);
-        
-          navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
-          video.srcObject = stream;
-        });
-      });
-
-      // make photo
-      startbutton.addEventListener('click', function(ev){
-        $(".camera-text").text("make photo!" );
-        takepicture();
-        ev.preventDefault();
-      }, false);
-
-      // remove old photo
-      clearphoto();
 
       function clearphoto() {
         var context = canvas.getContext('2d');
