@@ -1,4 +1,4 @@
-
+/******* RESET *******/
 * {
   margin: 0;
   padding: 0;
@@ -9,15 +9,153 @@
 }
 img {
   border: none;
-  display: inline-block;
-  max-width: 100%;
+  display: block;
+}
+ol,
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  cursor: pointer !important;
+}
+iframe[src^="http://uf.noclef.com"] {
+  position: absolute;
+}
+/******* START main styles *******/
+html {
+  font-size: 62.5%;
+}
+body,
+html {
+  width: 100%;
+  height: 100%
 }
 body {
-  height: 100vh;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  font-family: Arial, sans-serif;
+  min-width: 320px;
+  color: #fff;
+  background: #282828;
 }
-button {
+.wrapper {
+  padding: 30px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 100%;
+}
+
+/* STEP ITEM */
+.step-item {
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  flex: 1;
+}
+.step-item.is-active {
+  display: flex;
+}
+.step-title {
+  font-size: 14px;
+  text-align: center;
+  padding: 10px 0;
+}
+.step-title span {
+  font-weight: bold;
+}
+.step-content {
+  flex: 1;
+}
+/* NEXT STEP BTN */
+.next {
+  margin: 20px auto 0;
+  background: green;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  padding: 10px 40px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 1px rgba(0,0,0,0.4);
+}
+
+
+/***** BALL MOVE ******/
+.garden {
   position: relative;
-  width: 30vw;
-  height: 30vh;
-  background: grey;
+  width : 200px;
+  height: 200px;
+  border: 5px solid #CCC;
+  border-radius: 10px;
+  margin: auto;
+  background: green;
 }
+.ball {
+  position: absolute;
+  top   : 90px;
+  left  : 90px;
+  width : 20px;
+  height: 20px;
+  background: #fff;
+  box-shadow: 0 1px 2px 1px rgba(0,0,0,0.4);
+  border-radius: 100%;
+}
+
+/***** CHANGE BG ORIENTATION ******/
+.step-bg {
+  transition: background 1s linear;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center top;
+  
+}
+.step-bg[data-slide="1"] {
+  background-image: url(images/slide2-z2.jpg);
+}
+.step-bg[data-slide="2"] {
+  background-image: url(images/slide2-z.jpg);
+}
+/*********************/
+
+/****  VIBRATE BTNS ******/
+.vibrate-btns-block {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 10px auto;
+}
+.vibrate-btn {
+  width: 46%;
+  color: #fff;
+  font-size: 12px;
+  margin: 10px 5px;
+  padding: 10px 10px;
+  border-radius: 4px;
+  background: blue;
+  box-shadow: 0 2px 4px 1px rgba(0,0,0,0.4);
+}
+/*********************/
+
+/***** SHAKE ******/
+#shake-block {
+  background: green;
+}
+/*********************/
+
+/***** VIDEO ******/
+#video-container {
+  margin: 10px auto;
+  width: 100%;
+  padding: 10px;
+  background: white;
+  box-shadow: 0 1px 10px #D9D9D9;
+}
+#camera-stream {
+  width: 100%;
+}
+/*********************/
