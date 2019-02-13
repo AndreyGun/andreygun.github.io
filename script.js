@@ -196,7 +196,7 @@ jQuery(document).ready(function($) {
   
   $(".camera-btn").on("click",function(e){
     init(e);
-    $(".camera-text").text("startuem");
+    $(".camera-text").text("GO NAHUI!");
   });
 
 
