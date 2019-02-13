@@ -132,45 +132,20 @@ jQuery(document).ready(function($) {
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
 
-      // var constraints = {
-      //      audio: false,
-      //      video: {
-      //          facingMode: 'user'
-      //      }
-      // }
-      // navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
-      //   video.srcObject = stream;
-      //   video.setAttribute('width', width);
-      //   video.setAttribute('height', height);
-      //   canvas.setAttribute('width', width);
-      //   canvas.setAttribute('height', height);
-      // });
-
-    var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    var cameraStream;
-
-    getUserMedia.call(navigator, {
-          video: {
+      var constraints = {
+           audio: false,
+           video: {
                facingMode: 'user'
-           },
-          audio: false //optional
-      }, function (stream) {
-          /*
-          Here's where you handle the stream differently. Chrome needs to convert the stream
-          to an object URL, but Firefox's stream already is one.
-          */
-          if (window.webkitURL) {
-              video.src = window.webkitURL.createObjectURL(stream);
-          } else {
-              video.src = stream;
-          }
-
-          //save it for later
-          cameraStream = stream;
-
-          video.play();
+           }
+      }
+      navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+        video.srcObject = stream;
+        video.setAttribute('width', width);
+        video.setAttribute('height', height);
+        canvas.setAttribute('width', width);
+        canvas.setAttribute('height', height);
       });
-   }
+    }
       
 
     // start camera
