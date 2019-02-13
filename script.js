@@ -96,109 +96,85 @@ jQuery(document).ready(function($) {
 
 
   /********** VIDEO CAMERA ********/
-  // Normalize the various vendor prefixed versions of getUserMedia.
-  // navigator.getUserMedia = (navigator.getUserMedia ||
-  //                           navigator.webkitGetUserMedia ||
-  //                           navigator.mozGetUserMedia || 
-  //                           navigator.msGetUserMedia);
-
-  //$(".camera-btn").on("click",function(){
-    // // Check that the browser supports getUserMedia.
-    // // If it doesn't show an alert, otherwise continue.
-    // if (navigator.getUserMedia) {
-    //   // Request the camera.
-    //   navigator.getUserMedia({video: true},
-
-    //     // Success Callback
-    //     function(localMediaStream) {
-
-    //       // Get a reference to the video element on the page.
-    //       var vid = document.getElementById('camera-stream');
-
-    //       // Create an object URL for the video stream and use this 
-    //       // to set the video source.
-    //       vid.src = window.URL.createObjectURL(localMediaStream);
-          
-    //       vid.setAttribute("playsinline", true);
-    //       vid.setAttribute("controls", true);
-    //     },
-
-    //     // Error Callback
-    //     function(err) {
-    //       // Log the error to the console.
-    //       $(".camera-text").text('The following error occurred when trying to use getUserMedia: ' + err);
-    //     }
-    //   );
-
-    // } else {
-    //   $(".camera-text").text('Sorry, your browser does not support getUserMedia');
-    // }
-  //});
-  // $(".camera-btn").on("click",function(){
-  //   var video = document.querySelector('video');
-  //   navigator.mediaDevices.getUserMedia({video:true}).then(function(mediaStream){
-  //       window.stream = mediaStream;
-  //       video.src = URL.createObjectURL(mediaStream);
-  //       video.play();
-  //   });
-  // });
   /*-------------------END-----------------------
   */
   // Put variables in global scope to make them available to the browser console.
 
-  const constraints = window.constraints = {
-    audio: false,
-    video: true
-  };
+  // const constraints = window.constraints = {
+  //   audio: false,
+  //   video: true
+  // };
 
 
-  function handleError(error) {
-    if (error.name === 'ConstraintNotSatisfiedError') {
-      let v = constraints.video;
-      errorMsg(`The resolution ${v.width.exact}x${v.height.exact} px is not supported by your device.`);
-    } else if (error.name === 'PermissionDeniedError') {
-      errorMsg('Permissions have not been granted to use your camera and ' +
-        'microphone, you need to allow the page access to your devices in ' +
-        'order for the demo to work.');
-    }
-    errorMsg(`getUserMedia error: ${error.name}`, error);
-  }
+  // function handleError(error) {
+  //   if (error.name === 'ConstraintNotSatisfiedError') {
+  //     let v = constraints.video;
+  //     errorMsg(`The resolution ${v.width.exact}x${v.height.exact} px is not supported by your device.`);
+  //   } else if (error.name === 'PermissionDeniedError') {
+  //     errorMsg('Permissions have not been granted to use your camera and ' +
+  //       'microphone, you need to allow the page access to your devices in ' +
+  //       'order for the demo to work.');
+  //   }
+  //   errorMsg(`getUserMedia error: ${error.name}`, error);
+  // }
 
-  function errorMsg(msg, error) {
-    const errorElement = document.querySelector('#errorMsg');
-    errorElement.innerHTML += `<p>${msg}</p>`;
-    if (typeof error !== 'undefined') {
-      console.error(error);
-    }
-  }
+  // function errorMsg(msg, error) {
+  //   const errorElement = document.querySelector('#errorMsg');
+  //   errorElement.innerHTML += `<p>${msg}</p>`;
+  //   if (typeof error !== 'undefined') {
+  //     console.error(error);
+  //   }
+  // }
 
-  function handleSuccess(stream) {
-    //var videoTracks = stream.getVideoTracks();
+  // function handleSuccess(stream) {
+  //   //var videoTracks = stream.getVideoTracks();
 
-    //console.log('Got stream with constraints:', constraints);
-    //console.log(`Using video device: ${videoTracks[0].label}`);
+  //   //console.log('Got stream with constraints:', constraints);
+  //   //console.log(`Using video device: ${videoTracks[0].label}`);
 
-    var video = document.querySelector('video');
-    //window.stream = stream; // make variable available to browser console
-    video.srcObject = stream;
-  }
+  //   var video = document.querySelector('video');
+  //   //window.stream = stream; // make variable available to browser console
+  //   video.srcObject = stream;
+  // }
 
-  async function init(e) {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      handleSuccess(stream);
-      e.target.disabled = true;
-    } catch (e) {
-      handleError(e);
-    }
-  }
+  // async function init(e) {
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia(constraints);
+  //     handleSuccess(stream);
+  //     e.target.disabled = true;
+  //   } catch (e) {
+  //     handleError(e);
+  //   }
+  // }
 
   
-  $(".camera-btn").on("click",function(e){
-    init(e);
-    $(".camera-text").text("GO NAHUI!");
-  });
+  // $(".camera-btn").on("click",function(e){
+  //   init(e);
+  //   $(".camera-text").text("GO NAHUI!");
+  // });
 
+
+  $(function () {
+    video = document.getElementById('camera');
+    video.style.width = document.width + 'px';
+    video.style.height = document.height + 'px';
+    video.setAttribute('autoplay', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+
+    var constraints = {
+         audio: false,
+         video: {
+             facingMode: 'user'
+         }
+    }
+    $(".camera-btn").on("click",function(){
+      console.log("gggg");
+      navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+          video.srcObject = stream;
+      });
+    });
+});
 
   /********** LIGHT SENSOR ********/
   /* Поддержка только в Edge Mobile и Firefox for Android */
