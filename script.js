@@ -135,12 +135,12 @@ jQuery(document).ready(function($) {
       // start camera
       $("#showCamera").on("click", function() {
         startCamera();
-        $(".camera-text").text("camera work" );
+        $(".camera-text").text("camera work1" );
       });
 
       // make photo
       startbutton.addEventListener('click', function(ev){
-        $(".camera-text").text("make photo!" );
+        $(".camera-text").text("make photo!2" );
         takepicture();
         ev.preventDefault();
       }, false);
