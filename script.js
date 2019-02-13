@@ -96,15 +96,17 @@ jQuery(document).ready(function($) {
   /* working code bottom */
   /********** VIDEO CAMERA ********/
   $(function () {
-      var width = 320;
-      var height = 0;
+    var width = 320;
+    var height = 0;
+    var video = null;
+    var canvas = null;
+    var photo = null;
+    var startbutton = null;
 
-      var canvas = null;
 
       video = document.getElementById('camera');
       canvas = document.getElementById('canvas');
       photo = document.getElementById('photo');
-      startCamera = document.getElementById('startbutton');
       startbutton = document.getElementById('makePhoto');
 
 
@@ -136,8 +138,14 @@ jQuery(document).ready(function($) {
       }
 
       // start camera
-      $(".camera-btn").on("click",function() {
+      $("#startbutton").on("click",function() {
         $(".camera-text").text("camera work" );
+      
+        video.setAttribute('width', width);
+        video.setAttribute('height', height);
+        canvas.setAttribute('width', width);
+        canvas.setAttribute('height', height);
+        
           navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
           video.srcObject = stream;
         });
