@@ -196,12 +196,12 @@ jQuery(document).ready(function($) {
     // start camera
     $("#showCamera").on("click", function() {
       startCamera();
-      $(".camera-text").text("работает камера" );
+      $(".camera-text").text("работает камера 1" );
     });
 
     // make photo
     startbutton.addEventListener('click', function(ev){
-      $(".camera-text").text("сделать фотку" );
+      $(".camera-text").text("сделать фотку 1" );
       takepicture();
       ev.preventDefault();
     }, false);
