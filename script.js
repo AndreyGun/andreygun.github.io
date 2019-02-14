@@ -29,7 +29,6 @@ jQuery(document).ready(function($) {
 
   var maxX = garden.clientWidth  - ball.clientWidth;
   var maxY = garden.clientHeight - ball.clientHeight;
-  var videoFirstStep = document.getElementById("first-step-video");
 
   function handleOrientation(event) {
     var x = event.beta;  // In degree in the range [-180,180]
@@ -48,7 +47,6 @@ jQuery(document).ready(function($) {
     /* change bg */
     if (y > 0) {  
       $(".step-bg").attr("data-slide", "1");
-      videoFirstStep.play();
     } else if (y < - 5) {
       $(".step-bg").attr("data-slide", "2");
     }
