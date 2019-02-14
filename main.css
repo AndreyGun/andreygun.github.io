@@ -108,7 +108,7 @@ body {
 
 /***** CHANGE BG ORIENTATION ******/
 .step-bg {
-  transition: background 1s linear;
+  transition: background 0.4s linear;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center top;
@@ -166,6 +166,7 @@ body {
 #canvas.is-visible {
   display: block;
   object-fit: cover;
+  margin: 0 auto;
 }
 .camera-btn {
   display: inline-block;
