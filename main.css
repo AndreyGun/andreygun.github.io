@@ -167,6 +167,7 @@ body {
 }
 #canvas.is-visible {
   display: block;
+  object-fit: cover;
 }
 .camera-btn {
   display: inline-block;
