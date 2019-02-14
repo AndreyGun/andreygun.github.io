@@ -119,9 +119,8 @@ jQuery(document).ready(function($) {
   /* working code bottom */
   /********** VIDEO CAMERA ********/
   $(function () {
-    var width = 150;
-    var height = 150;
-    var startbutton = document.getElementById('makePhoto');
+    var startCameraBtn = document.getElementById('showCamera');
+    var makePhotoBtn = document.getElementById('makePhoto');
     var video = document.getElementById('camera');
     var canvas = document.getElementById('canvas');
     var photo = document.getElementById('photo');
@@ -132,76 +131,29 @@ jQuery(document).ready(function($) {
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
 
-      // var constraints = {
-      //      audio: false,
-      //      video: {
-      //          facingMode: 'user'
-      //      }
-      // }
-      // navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
-      //   video.srcObject = stream;
-      //   video.setAttribute('width', width);
-      //   video.setAttribute('height', height);
-      //   //canvas.setAttribute('width', width);
-      //   //canvas.setAttribute('height', height);
-      // });
-      // Older browsers might not implement mediaDevices at all, so we set an empty object first
-        if (navigator.mediaDevices === undefined) {
-          navigator.mediaDevices = {};
-        }
-
-        // Some browsers partially implement mediaDevices. We can't just assign an object
-        // with getUserMedia as it would overwrite existing properties.
-        // Here, we will just add the getUserMedia property if it's missing.
-        if (navigator.mediaDevices.getUserMedia === undefined) {
-          navigator.mediaDevices.getUserMedia = function(constraints) {
-
-            // First get ahold of the legacy getUserMedia, if present
-            var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
-            // Some browsers just don't implement it - return a rejected promise with an error
-            // to keep a consistent interface
-            if (!getUserMedia) {
-              return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
-            }
-
-            // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
-            return new Promise(function(resolve, reject) {
-              getUserMedia.call(navigator, constraints, resolve, reject);
-            });
-          }
-        }
-
-        navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-        .then(function(stream) {
-          var video = document.querySelector('camera');
-          // Older browsers may not have srcObject
-          if ("srcObject" in video) {
-            video.srcObject = stream;
-          } else {
-            // Avoid using this in new browsers, as it is going away.
-            video.src = window.URL.createObjectURL(stream);
-          }
-          video.onloadedmetadata = function(e) {
-            video.play();
-          };
-        })
-        .catch(function(err) {
-          console.log(err.name + ": " + err.message);
-        });
-
+      var constraints = {
+           audio: false,
+           video: {
+               facingMode: 'user'
+           }
+      }
+      navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+        video.srcObject = stream;
+      });
     }
       
 
     // start camera
-    $("#showCamera").on("click", function() {
+    startCameraBtn.addEventListener('click', function(){
       startCamera();
-      $(".camera-text").text("работает камера 1" );
+      makePhotoBtn.style.display = "block";
+      startCameraBtn.style.display = "none";
+      $(".camera-text").text("работает камера 2" );
     });
 
     // make photo
-    startbutton.addEventListener('click', function(ev){
-      $(".camera-text").text("сделать фотку 1" );
+    makePhotoBtn.addEventListener('click', function(ev){
+      $(".camera-text").text("сделать фотку 2" );
       takepicture();
       ev.preventDefault();
     }, false);
@@ -211,25 +163,18 @@ jQuery(document).ready(function($) {
 
 
     function takepicture() {
-      var camW =  $("#camera").width();
-      var camH = $("#camera").height();
-      var canvasW = 200;
-      var canvasH = canvasW / (camW / camH);
-      $("#canvas").css({
-        width: canvasW,
-        height: canvasH
-      });
+      var camWidth =  $("#camera").width();
+      var camHeight = $("#camera").height();
+      var canvasWidth = 200;
+      var canvasHeight = canvasWidth / (camWidth / camHeight);
+
       var context = canvas.getContext('2d');
-      if (width && height) {
-        canvas.width = canvasW;
-        canvas.height = canvasH;
-        context.drawImage(video, 0, 0, canvasW, canvasH);
+      if (camWidth && camHeight) {
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        context.drawImage(video, 0, 0, canvasWidth, canvasHeight);
 
         $("#canvas").addClass("is-visible");
-    
-        // var data = canvas.toDataURL('image/png');
-        // console.log(data);
-        // photo.setAttribute('src', data);
 
       } else {
         clearphoto();
