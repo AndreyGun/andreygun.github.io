@@ -119,73 +119,110 @@ jQuery(document).ready(function($) {
   /* working code bottom */
   /********** VIDEO CAMERA ********/
   $(function () {
-    var startCameraBtn = document.getElementById('showCamera');
-    var makePhotoBtn = document.getElementById('makePhoto');
-    var video = document.getElementById('camera');
-    var canvas = document.getElementById('canvas');
-    var photo = document.getElementById('photo');
+    // var startCameraBtn = document.getElementById('showCamera');
+    // var makePhotoBtn = document.getElementById('makePhoto');
+    // var video = document.getElementById('camera');
+    // var canvas = document.getElementById('canvas');
+    // var photo = document.getElementById('photo');
 
       
-    function startCamera() {
-      video.setAttribute('autoplay', '');
-      video.setAttribute('muted', '');
-      video.setAttribute('playsinline', '');
+    // function startCamera() {
+    //   video.setAttribute('autoplay', '');
+    //   video.setAttribute('muted', '');
+    //   video.setAttribute('playsinline', '');
 
-      var constraints = {
-           audio: false,
-           video: {
-               facingMode: 'user'
-           }
-      }
-      navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
-        video.srcObject = stream;
-      });
-    }
+    //   var constraints = {
+    //        audio: false,
+    //        video: {
+    //            facingMode: 'user'
+    //        }
+    //   }
+    //   navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+    //     video.srcObject = stream;
+    //   });
+    // }
       
 
-    // start camera
-    startCameraBtn.addEventListener('click', function(){
-      startCamera();
-      makePhotoBtn.style.display = "block";
-      startCameraBtn.style.display = "none";
-      $(".camera-text").text("работает камера" );
-    });
+    // // start camera
+    // startCameraBtn.addEventListener('click', function(){
+    //   startCamera();
+    //   makePhotoBtn.style.display = "block";
+    //   startCameraBtn.style.display = "none";
+    //   $(".camera-text").text("работает камера" );
+    // });
 
-    // make photo
-    makePhotoBtn.addEventListener('click', function(ev) {
-      $(".camera-text").text("сделать фотку" );
-      takepicture();
-      ev.preventDefault();
-    }, false);
+    // // make photo
+    // makePhotoBtn.addEventListener('click', function(ev) {
+    //   $(".camera-text").text("сделать фотку" );
+    //   takepicture();
+    //   ev.preventDefault();
+    // }, false);
 
-    // remove old photo
-    clearphoto();
+    // // remove old photo
+    // clearphoto();
 
 
-    function takepicture() {
-      var camWidth =  $("#camera").width();
-      var camHeight = $("#camera").height();
-      var canvasWidth = 200;
-      var canvasHeight = canvasWidth / (camWidth / camHeight);
+    // function takepicture() {
+    //   var camWidth =  $("#camera").width();
+    //   var camHeight = $("#camera").height();
+    //   var canvasWidth = 200;
+    //   var canvasHeight = canvasWidth / (camWidth / camHeight);
 
-      var context = canvas.getContext('2d');
-      if (camWidth && camHeight) {
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
-        context.drawImage(video, 0, 0, canvasWidth, canvasHeight);
+    //   var context = canvas.getContext('2d');
+    //   if (camWidth && camHeight) {
+    //     canvas.width = canvasWidth;
+    //     canvas.height = canvasHeight;
+    //     context.drawImage(video, 0, 0, canvasWidth, canvasHeight);
 
-        $("#canvas").addClass("is-visible");
+    //     $("#canvas").addClass("is-visible");
 
-      } else {
-        clearphoto();
-      }
-    }
+    //   } else {
+    //     clearphoto();
+    //   }
+    // }
 
-    function clearphoto() {
-      var context = canvas.getContext('2d');
-      context.fillStyle = "#AAA";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-    }
+    // function clearphoto() {
+    //   var context = canvas.getContext('2d');
+    //   context.fillStyle = "#AAA";
+    //   context.fillRect(0, 0, canvas.width, canvas.height);
+    // }
       
   });
+var startCameraBtn = document.getElementById('showCamera');
+  var video = document.createElement('video');
+  video.style.width = document.width + 'px';
+  video.style.height = document.height + 'px';
+  video.setAttribute('autoplay', '');
+  video.setAttribute('muted', '');
+  video.setAttribute('playsinline', '');
+  
+  var facingMode = "user";
+  var constraints = {
+    audio: false,
+    video: {
+     facingMode: facingMode
+    }
+  }
+  startCameraBtn.addEventListener('click', function(){
+    console.log("gege");
+    if (facingMode == "user") {
+      facingMode = "environment";
+    } else {
+      facingMode = "user";
+    }
+   
+    constraints = {
+      audio: false,
+      video: {
+        facingMode: facingMode
+      }
+    } 
+   
+    navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+      video.srcObject = stream; 
+    console.log("gege");
+    });
+    console.log("gege");
+  });
+
 });
