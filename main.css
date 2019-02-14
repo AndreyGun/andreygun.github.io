@@ -189,5 +189,7 @@ body {
 /*********************/
 
 #first-step-video {
-  width: 100%;
+  display: block;
+  width: 300px;
+  height: 200px;
 }
