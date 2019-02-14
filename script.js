@@ -166,17 +166,25 @@ jQuery(document).ready(function($) {
 
 
     function takepicture() {
+      var camW =  $("#camera").width();
+      var camH = $("#camera").height();
+      var canvasW = 200;
+      var canvasH = canvasW / (camW / camH);
+      $("#canvas").css({
+        width: canvasW,
+        height: canvasH
+      });
       var context = canvas.getContext('2d');
       if (width && height) {
         canvas.width = width;
         canvas.height = height;
-        context.drawImage(video, 0, 0, width, height);
+        context.drawImage(video, 0, 0, canvasW, canvasH);
 
         $("#canvas").addClass("is-visible");
     
-        var data = canvas.toDataURL('image/png');
-        console.log(data);
-        photo.setAttribute('src', data);
+        // var data = canvas.toDataURL('image/png');
+        // console.log(data);
+        // photo.setAttribute('src', data);
 
       } else {
         clearphoto();
