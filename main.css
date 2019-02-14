@@ -55,7 +55,7 @@ body {
   display: none;
   flex-direction: column;
   align-items: stretch;
-  justify-content: center;
+  justify-content: space-between;
   flex: 1;
 }
 .step-item.is-active {

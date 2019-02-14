@@ -195,8 +195,9 @@ jQuery(document).ready(function($) {
 
     /* make photo */
     makePhotoBtn.addEventListener('click', function(ev) {
-      $(".camera-text").text("сделать фотку" );
+      $(".camera-text").text("" );
       takepicture();
+      makePhotoBtn.style.display = "none";
       videoContainer.style.display = "none";
       ev.preventDefault();
     }, false);
