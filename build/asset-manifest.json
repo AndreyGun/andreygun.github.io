@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/AndreyGun/swapi-db.git/static/css/main.fee1339b.chunk.css",
+    "main.js": "/AndreyGun/swapi-db.git/static/js/main.ce41514b.chunk.js",
+    "main.js.map": "/AndreyGun/swapi-db.git/static/js/main.ce41514b.chunk.js.map",
+    "runtime~main.js": "/AndreyGun/swapi-db.git/static/js/runtime~main.84abe5bb.js",
+    "runtime~main.js.map": "/AndreyGun/swapi-db.git/static/js/runtime~main.84abe5bb.js.map",
+    "static/js/2.3129f4d1.chunk.js": "/AndreyGun/swapi-db.git/static/js/2.3129f4d1.chunk.js",
+    "static/js/2.3129f4d1.chunk.js.map": "/AndreyGun/swapi-db.git/static/js/2.3129f4d1.chunk.js.map",
+    "index.html": "/AndreyGun/swapi-db.git/index.html",
+    "precache-manifest.f63a586906a6c7553cefe196257ac1ee.js": "/AndreyGun/swapi-db.git/precache-manifest.f63a586906a6c7553cefe196257ac1ee.js",
+    "service-worker.js": "/AndreyGun/swapi-db.git/service-worker.js",
+    "static/css/main.fee1339b.chunk.css.map": "/AndreyGun/swapi-db.git/static/css/main.fee1339b.chunk.css.map"
+  }
+}
