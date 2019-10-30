@@ -798,7 +798,7 @@
                 console.log( 'n = c.camera.quaternion' + n );
                 console.log( ' s111sss');
                 document.querySelector('.alpha').textContent = ('alpha' + b);
-                document.querySelector('.beta').textContent = ('beta' + h);
+                document.querySelector('.beta').textContent = ('n = c.camera.quaternion' + n );
                 document.querySelector('.gamma').textContent = ('gamma' + f);
             }
         };
