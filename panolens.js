@@ -797,9 +797,9 @@
                 console.log( 'f - gamma:' + f);
                 console.log( 'n = c.camera.quaternion' + n );
                 console.log( ' s111sss');
-                document.querySelector('.alpha').textContent('alpha' + b);
-                document.querySelector('.beta').textContent('beta' + h);
-                document.querySelector('.gamma').textContent('gamma' + f);
+                document.querySelector('.alpha').textContent = ('alpha' + b);
+                document.querySelector('.beta').textContent = ('beta' + h);
+                document.querySelector('.gamma').textContent = ('gamma' + f);
             }
         };
         this.updateAlphaOffsetAngle = function(a) {
